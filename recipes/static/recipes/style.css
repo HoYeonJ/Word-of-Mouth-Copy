@@ -1,0 +1,35 @@
+/*
+color scheme: https://coolors.co/3c493f-7e8d85-b3bfb8-f0f7f4-a2e3c4
+	
+*/
+body {
+    background-image: linear-gradient(#7E8D85, #B3BFB8);
+}
+
+
+h1 {
+	color: #F0F7F4;
+	font-family: 'Optima';
+	text-align: center;
+	margin-top: 100;
+}
+
+.navbar-custom {
+    background-color: #DDDDDD !important;
+}
+
+.navbar-custom .nav-link {
+    color: #3C493F !important;
+}
+
+a[href] {
+	font-family: 'Copperplate';
+  	color: #3C493F;
+}
+
+p {
+	margin-top: 60;
+	color: #3C493F;
+	font-family: 'Optima';
+	text-align: center;
+}

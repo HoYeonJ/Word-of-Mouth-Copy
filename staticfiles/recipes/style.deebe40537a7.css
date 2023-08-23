@@ -1,0 +1,30 @@
+/*
+color scheme:
+	
+*/
+body {
+    background-image: linear-gradient(#222831, #30475E);
+}
+
+
+h1 {
+	color: #BBBBBB;
+	font-family: 'Optima';
+	text-align: center;
+	margin-top: 100;
+}
+
+.navbar-custom {
+    background-color: #DDDDDD !important;
+}
+
+.navbar-custom .nav-link {
+    color: #F05454 !important;
+}
+
+p {
+	margin-top: 60;
+	color: #F05454;
+	font-family: 'Optima';
+	text-align: center;
+}

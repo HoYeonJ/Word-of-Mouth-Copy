@@ -1,0 +1,16 @@
+/*
+color scheme:
+	
+*/
+body {
+    background-image: linear-gradient(#222831, #30475E);
+}
+
+
+h1 {
+	color: #BBBBBB;
+	font-family: 'Optima';
+	text-align: center;
+	margin-top: 100;
+}
+

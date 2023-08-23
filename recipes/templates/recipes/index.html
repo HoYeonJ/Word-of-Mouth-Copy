@@ -1,0 +1,13 @@
+{% load socialaccount %}
+<html>
+<body>
+<h1>Word of Mouth Login</h1>
+{% if user.is_authenticated %}
+  <p>Welcome, You are logged in as {{ user.username }}</p>
+  <a href="{% url 'recipes:home' %}">Continue</a>
+{% else %}
+<h1> Login Please</h1>
+  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+{% endif %}
+</body>
+</html>

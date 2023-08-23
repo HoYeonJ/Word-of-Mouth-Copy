@@ -1,0 +1,155 @@
+{% load static %} {% load socialaccount %}
+<link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}" />
+
+<!-- HTML files sources:
+Allauth:
+https://django-allauth.readthedocs.io/en/latest/installation.html
+https://learndjango.com/tutorials/django-allauth-tutorial
+google auth:
+https://www.tutorialspoint.com/google-authentication-in-django
+bootstrap:
+https://data-flair.training/blogs/django-bootstrap/
+https://getbootstrap.com/docs/4.3/getting-started/introduction/
+https://getbootstrap.com/docs/4.1/getting-started/theming/
+https://getbootstrap.com/docs/4.1/components/buttons/
+https://getbootstrap.com/docs/4.1/components/forms/
+https://getbootstrap.com/docs/4.1/components/navbar/
+also uses jQuery, Popper.js
+ -->
+
+<style>
+    header {
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+        /* Height of the footer*/
+        height: 60px;
+        background: lightgrey;
+    }
+
+    label {
+        display: block;
+        padding: 20px, 10px, 10px, 10px;
+        align: center;
+    }
+
+    body {
+        background-image: linear-gradient(#7e8d85, #b3bfb8);
+    }
+
+    imgbox {
+        display: grid;
+        height: 50%;
+    }
+
+    center-fit {
+        max-width: 100%;
+        max-height: 80%;
+        width: fit-content;
+        margin: auto;
+    }
+
+    p {
+        color: #565656;
+    }
+</style>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+        crossorigin="anonymous"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand abs" href="{% url 'recipes:home' %}">Word of Mouth</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link active" href="{% url 'recipes:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:feed' %}">Feed</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:post' %}">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:saved_posts' %}">Saved</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:my_posts' %}">My Recipes</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://a12-word-of-mouth.herokuapp.com/logout">Logout</a>
+                    </li>
+                </ul>
+                {% else %}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</head>
+
+<body>
+    <div>
+        {% if user.is_authenticated %}
+        <!-- Background image if LOGGED IN -->
+        <div class="bg-image" style="
+              background-image: url('https://images.unsplash.com/photo-1513135557534-682d53fd7046?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80');
+              height: 100vh;
+            ">
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <h1 style="color: #f0f7f4; margin-left: 5%; font-size: 100px;">Word of Mouth</h1>
+                    <div class="container">
+                        <ul>
+                            <a href="{% url 'recipes:my_posts' %}" class="btn btn-light btn-lg" role="button">My
+                                Recipes</a>
+                        </ul>
+                        <ul>
+                            <a href="{% url 'recipes:saved_posts' %}" class="btn btn-light btn-lg" role="button">Saved
+                                Recipes</a>
+                        </ul>
+                        <ul>
+                            <a href="{% url 'recipes:post' %}" class="btn btn-light btn-lg" role="button">Post
+                                Recipe</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- Background image if NOT LOGGED IN -->
+        <div class="bg-image" style="
+              background-image: url('https://images.unsplash.com/photo-1513135557534-682d53fd7046?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80');
+              height: 100vh;
+            ">
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <h1 style="color: #f0f7f4; margin-left: 5%; font-size: 100px;">Word of Mouth</h1>
+                    <div class="container">
+                        <a class="btn btn-light btn-lg" href="{% url 'account_login' %}">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Background image -->
+        {% endif %}
+    </div>
+</body>

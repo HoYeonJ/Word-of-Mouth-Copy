@@ -1,0 +1,127 @@
+{% load static %}
+{% load socialaccount %}
+<link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}">
+
+<style>
+    header {
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+        /* Height of the footer*/
+        height: 60px;
+        background: lightgrey;
+    }
+
+    label {
+        display: block;
+        padding: 20px, 10px, 10px, 10px;
+        align: center;
+    }
+
+    body {
+        background-image: linear-gradient(#7e8d85, #b3bfb8);
+    }
+
+    p {
+        color: #565656;
+    }
+</style>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+        crossorigin="anonymous"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand abs" href="{% url 'recipes:home' %}">Word of Mouth</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:feed' %}">Feed</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item active">
+                        <a class="nav-link active" href="{% url 'recipes:post' %}">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:saved_posts' %}">Saved</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recipes:my_posts' %}">My Recipes</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://a12-word-of-mouth.herokuapp.com/logout">Logout</a>
+                    </li>
+                </ul>
+                {% else %}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</head>
+
+<!--<ul class="nav navbar-custom nav-tabs justify-content-center">
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'recipes:home' %}">Home</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'recipes:feed' %}">Recipe Feed</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" aria-current="page" href="{% url 'recipes:post' %}">Post a new recipe</a>
+	</li>
+</ul>
+-->
+
+<!-- <form action="{% url 'recipes:post' %}" method="post">
+	{% csrf_token %}
+	<label for="author">Author: </label>
+	<input id="author" type="text" name="author">
+	<label for="title">Title: </label>
+	<input id="title" type="text" name="title"> -->
+<!--	{% for value, text in form.ingredients.field.choices %}
+  <div class="ui slider checkbox">
+    <input name="{{ form.ingredients.name }}" type="checkbox" value="{{ value }}">
+    <label>{{ text }}</label>
+  </div>
+{% endfor %}-->
+<!-- 	<button type="submit">Post?</button>-->
+{% if user.is_authenticated %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Add A Recipe</h1>
+            <br />
+            <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% else %}
+<a href="{% provider_login_url 'google' %}">Login to post a recipe</a>
+{% endif %}
+
+</form>

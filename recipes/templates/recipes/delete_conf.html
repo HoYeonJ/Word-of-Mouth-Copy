@@ -1,0 +1,86 @@
+{% load static %} {% load socialaccount %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'recipes/style.css' %}"> -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF"
+    crossorigin="anonymous"
+/>
+<style>
+    header {
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+        /* Height of the footer*/
+        height: 60px;
+        background: lightgrey;
+    }
+    label {
+        display: block;
+        padding: 20px, 10px, 10px, 10px;
+    }
+    body {
+        background-image: linear-gradient(#7e8d85, #b3bfb8);
+    }
+    a[href] {
+        font-family: "Copperplate";
+        color: #3c493f;
+    }
+</style>
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row justify-content-center">
+        <h1
+            style="
+                text-align: center;
+                margin-top: 100px;
+                font-family: 'Gabriola';
+            "
+        >
+            Are you sure you want to delete {{recipe.title}}?
+        </h1>
+        <h5
+            style="
+                text-align: center;
+                margin-top: 10px;
+                font-family: 'Gabriola';
+            "
+        >
+            This cannot be undone
+        </h5>
+        <center>
+            <img
+                src="{{recipe.recipe_image.url}}"
+                alt="..."
+                class="center"
+                style="max-width: auto; max-height: 15rem; object-fit: cover"
+            />
+            <div class="center" style="margin-top: 50px">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button
+                        type="submit"
+                        value="back"
+                        id="back"
+                        class="btn btn-success"
+                        name="back"
+                        style="font-family: 'Courier'; color: #ffffff"
+                    >
+                        Go Back
+                    </button>
+                    <button
+                        type="submit"
+                        value="del_button"
+                        id="del_button"
+                        class="btn btn-danger"
+                        name="del_button"
+                        style="font-family: 'Courier'; color: #ffffff"
+                    >
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </center>
+    </div>
+</div>
+{% endif %}
