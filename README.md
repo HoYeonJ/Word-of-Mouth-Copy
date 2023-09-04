@@ -10,4 +10,5 @@ Text-based filter of recipes
 
 Written using the Django framework, continuously integrated through GitHub Actions, and hosted and built on Heroku using S3 buckets for image storage and a PostgreSQL backend database. 
 
-Teammate credits: Preethi Chidambaram, Susannah Cutler, Lucia Hoerr, Drew Reidy
+# Credits
+Preethi Chidambaram, Susannah Cutler, Lucia Hoerr, Drew Reidy
